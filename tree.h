@@ -7,15 +7,15 @@ using namespace std;
 struct Node
 {
     int num = 0;
-    std::string token;
+    string token;
     Node* left = NULL;
     Node* right = NULL;
 };
 
 class Token {
 public:
-    std::string token;
-    std::string type;
+    string token;
+    string type;
 };
 
-void Build_tree(std::string x, int n, std::stack<Node*>& S);
+void Build_tree(string str, int number, stack<Node*>& stack);
