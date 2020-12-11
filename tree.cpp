@@ -21,3 +21,12 @@ void Build_tree(std::string token, int number, std::stack<Node*>& stack) {
     left->num = number;
     stack.push(left);
 }
+
+void preOrderTraversal(Node* node, std::string str) {
+    if (node == nullptr) {
+        return;
+    }
+    std::cout << str << node->token << "(" << node->num << ")" << std::endl;
+    preOrderTraversal(node->left, str + ". ");
+    preOrderTraversal(node->right, str);
+}

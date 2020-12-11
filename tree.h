@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <stack>
+#include <iostream>
 
 using namespace std;
 
@@ -19,3 +20,5 @@ public:
 };
 
 void Build_tree(string str, int number, stack<Node*>& stack);
+
+void preOrderTraversal(Node* node, std::string str);
