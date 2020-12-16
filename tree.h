@@ -1,3 +1,4 @@
+//Simon Tobon - 7269-4319
 #pragma once
 #include <string>
 #include <stack>
@@ -21,4 +22,4 @@ public:
 
 void Build_tree(string str, int number, stack<Node*>& stack);
 
-void preOrderTraversal(Node* node, std::string str);
+void preOrderTraversal(Node* node, string str);

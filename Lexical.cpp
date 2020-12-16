@@ -1,10 +1,11 @@
+//Simon Tobon - 7269-4319
 #include "Lexical.h"
 #include <unordered_set>
 
-std::vector<Token> LexVec(std::string file) 
+vector<Token> LexVec(string file) 
 {
     //Vector to return
-    std::vector<Token> outputVec;
+    vector<Token> outputVec;
 
     ifstream input;
 
@@ -12,7 +13,7 @@ std::vector<Token> LexVec(std::string file)
 
     if (!input) 
     {
-        std::cout << "Failed to open file!" << std::endl;
+        cout << "Failed to open file!" << endl;
         exit(0);
     }
     //File to string -- https://stackoverflow.com/a/19922123/9442554
@@ -190,7 +191,7 @@ std::vector<Token> LexVec(std::string file)
 
     string p_token;
     string final("");
-    std::stringstream inputStringStream(fileToString);
+    stringstream inputStringStream(fileToString);
     inputStringStream >> p_token;
 
 
@@ -198,7 +199,7 @@ std::vector<Token> LexVec(std::string file)
     bool keywordsBool = true;
 
     //store keywords for classification of tokens
-    unordered_set<std::string> keywords({ "program","var","const","type","function","return","begin","end","output","if","then","else","while","do",
+    unordered_set<string> keywords({ "program","var","const","type","function","return","begin","end","output","if","then","else","while","do",
                                           "case","of","otherwise","repeat","for","until","loop","pool","exit","read","succ","pred","chr","ord","eof",
                                           ":=:", ":=", "..", "<=", "<>", "<", ">=", ">", "=", "mod","and","or","not",":",";",".",",","+","-","*","/",
                                           "{","}","(",")" });
@@ -220,7 +221,7 @@ std::vector<Token> LexVec(std::string file)
         Token currentToken;
         currentToken.type = "";
 
-        regex int_regex("[0-9]");
+        //regex int_regex("[0-9]"); -- regex not working
 
         //Variable
         if (p_token == "var") 
@@ -239,7 +240,7 @@ std::vector<Token> LexVec(std::string file)
             for (int i = 0; i < p_token.length(); i = i + 1) 
             {
                 //Integer (0-9)
-                if (!regex_match(p_token, int_regex))
+                if (!(p_token.at(i) >= '0' && p_token.at(i) <= '9'))
                 {
                     isInt = false;
                 }
@@ -248,14 +249,9 @@ std::vector<Token> LexVec(std::string file)
             {
                 currentToken.type = "integer";
             }
-            else if (p_token.at(0) == '\'') 
+            else if (p_token.at(0) == '\'')
             {
                 currentToken.type = "char";
-            }
-
-            else if (keywordsBool == false)
-            {
-                currentToken.type = "identifier";
             }
             else if (!(keywords.find(p_token) != keywords.end()))
             {
@@ -276,6 +272,7 @@ std::vector<Token> LexVec(std::string file)
                 tokenBuf = tokenBuf + " " + p_token;
                 inputStringStream >> p_token;
             }
+            
 
             currentToken.token = tokenBuf;
             currentToken.type = "string";

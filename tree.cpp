@@ -1,6 +1,9 @@
+//Simon Tobon - 7269-4319
+
 #include "tree.h"
 
-void Build_tree(std::string token, int number, std::stack<Node*>& stack) {
+void Build_tree(string token, int number, stack<Node*>& stack) 
+{
 
     Node* node1 = NULL;
     Node* current = new Node;
@@ -22,11 +25,13 @@ void Build_tree(std::string token, int number, std::stack<Node*>& stack) {
     stack.push(left);
 }
 
-void preOrderTraversal(Node* node, std::string str) {
-    if (node == nullptr) {
+void preOrderTraversal(Node* node, string str) 
+{
+    if (node == nullptr) 
+    {
         return;
     }
-    std::cout << str << node->token << "(" << node->num << ")" << std::endl;
+    cout << str << node->token << "(" << node->num << ")" << endl;
     preOrderTraversal(node->left, str + ". ");
     preOrderTraversal(node->right, str);
 }
